@@ -1,27 +1,27 @@
 ## EVO Projekt – README
 
-Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatronikus szem prototípus, amely ötvözi a szemmozgás-követést, hangvezérlést és mesterséges intelligenciát a felhasználói interakciók új szintre emeléséhez. A projekt célja egy költséghatékony, testre szabható platform létrehozása, amely orvosi, ipari vagy oktatási alkalmazásokban is hasznosítható[1][2].
+Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatronikus szem prototípus, amely ötvözi a szemmozgás-követést, hangvezérlést és mesterséges intelligenciát a felhasználói interakciók új szintre emeléséhez. A projekt célja egy költséghatékony, testre szabható platform létrehozása, amely orvosi, ipari vagy oktatási alkalmazásokban is hasznosítható.
 
 ---
 
 ## Főbb Jellemzők
 
-- **Valós idejű szemmozgás-felismerés**: Kameraalapú követés MediaPipe és TensorFlow Lite segítségével, helyi feldolgozással (Raspberry Pi 4-en)[2].
-- **Hibrid vezérlés**: Szem- és hangvezérlés kombinációja (pl. „Nézz balra!” parancsra a szemek elfordulnak)[2].
-- **Moduláris hardver**: Könnyen bővíthető új szenzorokkal (pl. LIDAR, hőmérséklet-érzékelő) vagy aktorokkal (pl. robotkar)[2].
-- **Költséghatékonyság**: Jelentősen olcsóbb a piaci alternatíváknál, alacsony karbantartási költségek, DIY alkatrészekkel javítható[2].
-- **Nyílt forráskód**: Python és TensorFlow kódok teljes hozzáféréssel, szabadon testre szabható[2].
+- **Valós idejű szemmozgás-felismerés**: Kameraalapú követés MediaPipe és TensorFlow Lite segítségével, helyi feldolgozással (Raspberry Pi 4-en).
+- **Hibrid vezérlés**: Szem- és hangvezérlés kombinációja (pl. „Nézz balra!” parancsra a szemek elfordulnak).
+- **Moduláris hardver**: Könnyen bővíthető új szenzorokkal (pl. LIDAR, hőmérséklet-érzékelő) vagy aktorokkal (pl. robotkar).
+- **Költséghatékonyság**: Jelentősen olcsóbb a piaci alternatíváknál, alacsony karbantartási költségek, DIY alkatrészekkel javítható.
+- **Nyílt forráskód**: Python és TensorFlow kódok teljes hozzáféréssel, szabadon testre szabható.
 
 ---
 
 ## Hardverkövetelmények
 
-- **Mikrokontroller**: Raspberry Pi 4 vagy Arduino[1]
-- **Szervomotorok**: 6× MG996R (szemmozgás szimulációhoz)[2]
-- **Vezérlő**: PCA9685 szervóvezérlő[2]
-- **Kamera**: USB vagy Raspberry Pi kompatibilis kamera[1]
-- **Mozgásérzékelő**: Ultrahangos szenzor (opcionális)[1]
-- **Mikrofonmodul**: Hangvezérléshez[1]
+- **Mikrokontroller**: Raspberry Pi x
+- **Szervomotorok**: 6× MG996R (szemmozgás szimulációhoz)
+- **Vezérlő**: PCA9685 szervóvezérlő
+- **Kamera**: USB vagy Raspberry Pi kompatibilis kamera
+- **Mozgásérzékelő**: Ultrahangos szenzor (opcionális)
+- **Mikrofonmodul**: Hangvezérléshez
 
 ---
 
@@ -55,10 +55,10 @@ Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatro
 
 ## Fejlesztési ütemterv (részlet)
 
-- **1. hónap**: Alapkutatás, rendszerterv, hardver kiválasztása, szoftverterv kidolgozása[1]
-- **2. hónap**: Hardver- és szoftverprototípus fejlesztése, AI-modulok integrálása[1]
-- **3. hónap**: Interaktív funkciók, gépi tanulás, adaptív válaszok fejlesztése[1][2]
-- **4. hónap**: Felhasználói tesztelés, dokumentáció, további fejlesztési irányok meghatározása[1][2]
+- **1. hónap**: Alapkutatás, rendszerterv, hardver kiválasztása, szoftverterv kidolgozása
+- **2. hónap**: Hardver- és szoftverprototípus fejlesztése, AI-modulok integrálása
+- **3. hónap**: Interaktív funkciók, gépi tanulás, adaptív válaszok fejlesztése
+- **4. hónap**: Felhasználói tesztelés, dokumentáció, további fejlesztési irányok meghatározása
 
 ---
 
@@ -67,7 +67,7 @@ Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatro
 - Orvosi segédeszközök (pl. mozgáskorlátozottak interakciója)
 - Ipari automatizálás (figyelem-követés, hibacsökkentés)
 - Oktatás (interaktív tanulási platformok)
-- Human-computer interaction (HCI) kutatás[1][2]
+- Human-computer interaction (HCI) kutatás
 
 ---
 
