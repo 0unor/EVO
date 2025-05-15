@@ -1,3 +1,19 @@
+
+
+
+![image](https://github.com/user-attachments/assets/76ff31b1-9cc6-44d0-becf-12b7d4777c97)
+
+
+
+
+
+
+
+
+
+
+
+
 ## EVO Projekt – README
 
 Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatronikus szem prototípus, amely ötvözi a szemmozgás-követést, hangvezérlést és mesterséges intelligenciát a felhasználói interakciók új szintre emeléséhez. A projekt célja egy költséghatékony, testre szabható platform létrehozása, amely orvosi, ipari vagy oktatási alkalmazásokban is hasznosítható.
