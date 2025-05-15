@@ -67,7 +67,7 @@ Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatro
 
 ## Felhasználási területek
 
-- Orvosi segédeszközök (pl. mozgáskorlátozottak interakciója)
+- Orvosi segédeszközök (pl. mozgáskorlátozottak interakciója, későbbiekben akár ALS)
 - Ipari automatizálás (figyelem-követés, hibacsökkentés)
 - Oktatás (interaktív tanulási platformok)
 - Human-computer interaction (HCI) kutatás
