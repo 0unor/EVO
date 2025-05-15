@@ -1,18 +1,5 @@
 
-
-
 ![image](https://github.com/user-attachments/assets/76ff31b1-9cc6-44d0-becf-12b7d4777c97)
-
-
-
-
-
-
-
-
-
-
-
 
 ## EVO Projekt – README
 
