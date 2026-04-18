@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+from mediapipe.solutions import drawing_utils as mp_drawing, drawing_styles as mp_drawing_styles
 import numpy as np
 import math
 import time
@@ -21,10 +22,12 @@ kit.servo[1].angle = 90   # Left pan
 kit.servo[4].angle = 140  # Right lid
 kit.servo[5].angle = 90   # Right pan
 
-# Blink Control Variables
-blink_count = 0
-blink_state = False
-last_blink_time = 0
+# Blink / Relay Control Variables
+blink_counter = 0                # counts individual blinks (0..2) until toggle
+relay_on = False                 # current relay state
+eyes_closed_prev = False         # previous frame closed state
+last_closure_time = 0            # when eyes were detected closed
+last_blink_time = 0              # debounce for counting blinks
 
 # Eye Tracking Variables
 eye_move = "neutral"
@@ -122,31 +125,39 @@ with mp_face_mesh.FaceMesh(
                     kit.servo[5].angle = 90
 
                 # Eye closure detection with adjusted thresholds
-                if ratioROC < 0.2 and ratioLOC < 0.2:  # More lenient threshold
-                    eye_move = "both eye close"
-                    if current_time - last_event_time > debounce_time:
-                        print("Triggering 3-blink sequence!")
-                        blink_count = 3
-                        last_event_time = current_time
-                        kit.servo[0].angle = 90
-                        kit.servo[4].angle = 90
-                elif ratioROC < 0.2:
-                    eye_move = "right eye close"
-                    kit.servo[4].angle = 90
-                elif ratioLOC < 0.2:
-                    eye_move = "left eye close"
-                    kit.servo[0].angle = 90
+                eyes_closed = (ratioROC < 0.2 and ratioLOC < 0.2)
 
-        # Relay control logic
-        if blink_count > 0:
-            if current_time - last_blink_time >= 0.5:
-                blink_state = not blink_state
-                relay_control(blink_state)
-                if not blink_state:
-                    blink_count -= 1
-                last_blink_time = current_time
-        else:
-            relay_control(GPIO.LOW)
+                # transitions for blink counting (closed -> open counts as a blink)
+                if eyes_closed and not eyes_closed_prev:
+                    last_closure_time = current_time
+                    kit.servo[0].angle = 90
+                    kit.servo[4].angle = 90
+
+                if (not eyes_closed) and eyes_closed_prev:
+                    closure_duration = current_time - last_closure_time
+                    if 0.03 < closure_duration < 1.0 and (current_time - last_blink_time) > 0.2:
+                        blink_counter += 1
+                        last_blink_time = current_time
+                        print(f"Blink detected (count={blink_counter})")
+                        if blink_counter >= 3:
+                            relay_on = not relay_on
+                            relay_control(GPIO.HIGH if relay_on else GPIO.LOW)
+                            print(f"Relay toggled -> {'ON' if relay_on else 'OFF'}")
+                            blink_counter = 0
+
+                # single-eye close handling when not both closed
+                if not eyes_closed:
+                    if ratioROC < 0.2:
+                        eye_move = "right eye close"
+                        kit.servo[4].angle = 90
+                    elif ratioLOC < 0.2:
+                        eye_move = "left eye close"
+                        kit.servo[0].angle = 90
+
+                eyes_closed_prev = eyes_closed
+
+        # Ensure relay output matches relay_on state
+        relay_control(GPIO.HIGH if relay_on else GPIO.LOW)
 
         # Display updates
         fps, prev_time = calculate_fps(prev_time, prev_fps)
@@ -154,8 +165,39 @@ with mp_face_mesh.FaceMesh(
                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2)
         cv2.putText(frame, f'State: {eye_move}', (10, 70), 
                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2)
+        cv2.putText(frame, f'Blinks: {blink_counter}/3', (10, 110), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+        cv2.putText(frame, f'Relay: {"ON" if relay_on else "OFF"}', (10, 150), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
         cv2.circle(frame, (ball_x, ball_y), ball_radius, ball_color, -1)
         move_ball(eye_move)
+
+        # Draw MediaPipe face mesh overlays for visualization
+        if results.multi_face_landmarks:
+            for face_landmarks in results.multi_face_landmarks:
+                mp_drawing.draw_landmarks(
+                    image=frame,
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_TESSELATION,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style())
+                mp_drawing.draw_landmarks(
+                    image=frame,
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_CONTOURS,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_contours_style())
+                # Draw iris connections (may not exist in older mediapipe)
+                try:
+                    mp_drawing.draw_landmarks(
+                        image=frame,
+                        landmark_list=face_landmarks,
+                        connections=mp_face_mesh.FACEMESH_IRISES,
+                        landmark_drawing_spec=None,
+                        connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_contours_style())
+                except Exception:
+                    pass
+
         cv2.imshow('Eye Control', frame)
 
         if cv2.waitKey(5) & 0xFF == 27:
