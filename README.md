@@ -1,96 +1,94 @@
-
 ![image](https://github.com/user-attachments/assets/76ff31b1-9cc6-44d0-becf-12b7d4777c97)
 
-## EVO Projekt – README
+## EVO Project – README
 
-Az EVO (Enhanced Vision Operative) egy nyílt forráskódú, moduláris animatronikus szem prototípus, amely ötvözi a szemmozgás-követést, hangvezérlést és mesterséges intelligenciát a felhasználói interakciók új szintre emeléséhez. A projekt célja egy költséghatékony, testre szabható platform létrehozása, amely orvosi, ipari vagy oktatási alkalmazásokban is hasznosítható.
-
----
-
-## Főbb Jellemzők
-
-- **Valós idejű szemmozgás-felismerés**: Kameraalapú követés MediaPipe és TensorFlow Lite segítségével, helyi feldolgozással (Raspberry Pi 4-en).
-- **Hibrid vezérlés**: Szem- és hangvezérlés kombinációja (pl. „Nézz balra!” parancsra a szemek elfordulnak).
-- **Moduláris hardver**: Könnyen bővíthető új szenzorokkal (pl. LIDAR, hőmérséklet-érzékelő) vagy aktorokkal (pl. robotkar).
-- **Költséghatékonyság**: Jelentősen olcsóbb a piaci alternatíváknál, alacsony karbantartási költségek, DIY alkatrészekkel javítható.
-- **Nyílt forráskód**: Python és TensorFlow kódok teljes hozzáféréssel, szabadon testre szabható.
+EVO (Enhanced Vision Operative) is an open-source, modular animatronic eye prototype that combines eye-tracking, voice control, and artificial intelligence to elevate user interactions to a new level. The project's goal is to create a cost-effective, customizable platform that can be utilized in medical, industrial, or educational applications.
 
 ---
 
-## Hardverkövetelmények
+## Key Features
 
-- **Mikrokontroller**: Raspberry Pi x
-- **Szervomotorok**: 6× MG996R (szemmozgás szimulációhoz)
-- **Vezérlő**: PCA9685 szervóvezérlő
-- **Kamera**: USB vagy Raspberry Pi kompatibilis kamera
-- **Mozgásérzékelő**: Ultrahangos szenzor (opcionális)
-- **Mikrofonmodul**: Hangvezérléshez
+- **Real-time eye tracking**: Camera-based tracking using MediaPipe and TensorFlow Lite, with local processing (on a Raspberry Pi 4).
+- **Hybrid control**: A combination of eye and voice control (e.g., the eyes turn upon the command "Look left!").
+- **Modular hardware**: Easily expandable with new sensors (e.g., LIDAR, temperature sensor) or actuators (e.g., robotic arm).
+- **Cost-effectiveness**: Significantly cheaper than market alternatives, low maintenance costs, and repairable with DIY components.
+- **Open source**: Full access to Python and TensorFlow code, allowing for free customization.
 
 ---
 
-## Szoftverkövetelmények
+## Hardware Requirements
+
+- **Microcontroller**: Raspberry Pi 5
+- **Servo motors**: 6× MG996R (for eye movement simulation)
+- **Controller**: PCA9685 servo driver
+- **Camera**: USB or Raspberry Pi compatible camera
+- **Motion sensor**: Ultrasonic sensor (not implemented yet)
+- **Microphone module**: For voice control (not implemented yet)
+
+---
+
+## Software Requirements
 
 - **Python 3.x**
-- **TensorFlow Lite**
 - **MediaPipe**
 - **OpenCV**
-- **GPIO könyvtárak (Raspberry Pi esetén)**
+- **GPIO libraries (for Raspberry Pi)**
 
 ---
 
-## Telepítés
+## Installation
 
-1. Klónozd a repót:
+1. Clone the repository:
    ```bash
-   git clone https://github.com//EVO.git
+   git clone [https://github.com//EVO.git](https://github.com//EVO.git)
    ```
-2. Telepítsd a szükséges Python csomagokat:
+2. Install the required Python packages:
    ```bash
    pip install -r requirements.txt
    ```
-3. Csatlakoztasd a hardverelemeket a dokumentáció szerint.
-4. Indítsd el a vezérlő szkriptet:
+3. Connect the hardware components according to the documentation.
+4. Start the control script:
    ```bash
    python main.py
    ```
 
 ---
 
-## Fejlesztési ütemterv (részlet)
+## Development Roadmap (Excerpt)
 
-- **1. hónap**: Alapkutatás, rendszerterv, hardver kiválasztása, szoftverterv kidolgozása
-- **2. hónap**: Hardver- és szoftverprototípus fejlesztése, AI-modulok integrálása
-- **3. hónap**: Interaktív funkciók, gépi tanulás, adaptív válaszok fejlesztése
-- **4. hónap**: Felhasználói tesztelés, dokumentáció, további fejlesztési irányok meghatározása
-
----
-
-## Felhasználási területek
-
-- Orvosi segédeszközök (pl. mozgáskorlátozottak interakciója, későbbiekben akár ALS)
-- Ipari automatizálás (figyelem-követés, hibacsökkentés)
-- Oktatás (interaktív tanulási platformok)
-- Human-computer interaction (HCI) kutatás
+- **Month 1**: Basic research, system design, hardware selection, and software design development
+- **Month 2**: Hardware and software prototype development, and AI module integration
+- **Month 3**: Development of interactive features, machine learning, and adaptive responses
+- **Month 4**: User testing, documentation, and determining further development directions
 
 ---
 
-## Hozzájárulás
+## Use Cases
 
-Szívesen várjuk a közösségi hozzájárulásokat! Hibákat, ötleteket vagy új modulokat pull request formájában lehet beküldeni.
-
----
-
-## Licenc
-
-Ez a projekt nyílt forráskódú, a licenc részletei a LICENSE fájlban találhatók.
+- Medical assistive devices (e.g., interaction for physically disabled individuals, potentially for ALS in the future)
+- Industrial automation (attention tracking, error reduction)
+- Education (interactive learning platforms)
+- Human-computer interaction (HCI) research
 
 ---
 
-## Kapcsolat
+## Contributing
 
-Készítő: Deák Hunor
-Kérdés vagy észrevétel: [deakhunor14@gmail.com]
+We welcome community contributions! Bugs, ideas, or new modules can be submitted in the form of pull requests.
 
 ---
 
-> „Az emberek nem azt hiszik, amit látnak, hanem azt látják, amit hisznek.”
+## License
+
+This project is open-source; the license details can be found in the LICENSE file.
+
+---
+
+## Contact
+
+Creator: Deák Hunor
+Questions or comments: [deakhunor14@gmail.com]
+
+---
+
+> "People don't believe what they see; they see what they believe."
