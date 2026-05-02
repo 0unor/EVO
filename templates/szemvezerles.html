@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVO - Eye Control</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body { background: #000; color: white; font-family: 'Rajdhani', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+        .nav { width: 100%; padding: 15px 30px; background: #0f172a; display: flex; justify-content: space-between; z-index: 100; box-sizing: border-box; border-bottom: 1px solid #334155; }
+        .nav span { color: #94a3b8; font-size: 1.2em; letter-spacing: 3px; font-weight: 700; }
+
+        .btn-group { display: flex; gap: 10px; }
+        .nav a, .action-btn { color: #22d3ee; text-decoration: none; cursor: pointer; background: none; border: 1px solid #22d3ee; padding: 5px 15px; border-radius: 4px; font-family: inherit; font-size: 1.1em; font-weight: 700; transition: 0.2s; }
+        .nav a:hover, .action-btn:hover { background: rgba(34, 211, 238, 0.1); }
+        .action-btn.calib { color: #f43f5e; border-color: #f43f5e; }
+        .action-btn.calib:hover { background: rgba(244, 63, 94, 0.1); }
+
+        .container { position: relative; width: 100%; height: calc(100vh - 60px); display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #1e293b 0%, #050505 100%); }
+        #video-feed { max-width: 95vw; max-height: 85vh; border: 2px solid #334155; border-radius: 10px; box-shadow: 0 0 40px rgba(34, 211, 238, 0.15); object-fit: contain; }
+
+        :-webkit-full-screen #video-feed { width: 100vw; height: 100vh; max-width: none; max-height: none; border: none; border-radius: 0; }
+        :-ms-fullscreen #video-feed { width: 100vw; height: 100vh; }
+        :fullscreen #video-feed { width: 100vw; height: 100vh; max-width: none; max-height: none; border: none; border-radius: 0; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <span>EVO_OS // EYE_TRACKING_MODE</span>
+        <div class="btn-group">
+            <button class="action-btn calib" onclick="startCalibration()">RECALIBRATE</button>
+            <button class="action-btn" onclick="toggleFullscreen()">FULLSCREEN</button>
+            <a href="/">[ EXIT ]</a>
+        </div>
+    </div>
+
+    <div class="container" id="fs-container">
+        <img id="video-feed" src="/video_feed" onerror="this.src='https://via.placeholder.com/640x480/1e293b/22d3ee?text=STREAM+PAUSED'">
+    </div>
+
+    <script>
+        function toggleFullscreen() {
+            let elem = document.getElementById("fs-container");
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {});
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function startCalibration() {
+            fetch('/api/start_calibration', { method: 'POST' })
+            .then(() => console.log("Calibration started."));
+        }
+    </script>
+</body>
+</html>
