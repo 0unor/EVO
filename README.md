@@ -8,7 +8,7 @@ Before starting, ensure all hardware (Raspberry Pi, PCA9685 Servo Driver, Camera
 
 To start the EVO software, open your terminal, activate your Python virtual environment, and run the main script:
 ```bash
-python EVO_App.py
+python evo_app_improved.py
 ```
 
 The terminal will confirm that the camera, I2C servos, and GPIO relay have successfully initialized. 
